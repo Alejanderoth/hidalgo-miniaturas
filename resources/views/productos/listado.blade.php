@@ -19,6 +19,7 @@
             <th>Precio</th>
             <th>Stock</th>
             <th>Imagen</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,9 @@
                 <td>{{ $producto->precio }}</td>
                 <td>{{ $producto->stock }}</td>
                 <td>{{ $producto->imagen }}</td>
+                <td>
+                    <a href="/productos/{{ $producto->id }}/editar">Editar</a>
+                </td>
             </tr>
         @endforeach
     </tbody>

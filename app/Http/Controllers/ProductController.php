@@ -51,4 +51,34 @@ class ProductController extends Controller
 
         return redirect('/productos/listado');
     }
+
+    public function edit($id)
+    {
+        $producto = Product::find($id);
+
+        if (!$producto) {
+            return redirect('/productos/listado');
+        }
+
+        return view('productos.editar', compact('producto'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $producto = Product::find($id);
+
+        if (!$producto) {
+            return redirect('/productos/listado');
+        }
+
+        $producto->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'stock' => $request->stock,
+            'imagen' => $request->imagen,
+        ]);
+
+        return redirect('/productos/listado');
+    }
 }
