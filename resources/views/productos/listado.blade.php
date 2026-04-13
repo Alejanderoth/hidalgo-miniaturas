@@ -32,7 +32,12 @@
                 <td>{{ $producto->stock }}</td>
                 <td>{{ $producto->imagen }}</td>
                 <td>
-                    <a href="/productos/{{ $producto->id }}/editar">Editar</a>
+                    <a href="/productos/{{ $producto->id }}/editar" >Editar</a>
+                    <form action="/productos/{{ $producto->id }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Eliminar</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

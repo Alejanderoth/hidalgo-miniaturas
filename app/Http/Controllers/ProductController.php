@@ -81,4 +81,17 @@ class ProductController extends Controller
 
         return redirect('/productos/listado');
     }
+
+    public function destroy($id)
+    {
+        $producto = Product::find($id);
+
+        if (!$producto) {
+            return redirect('/productos/listado');
+        }
+
+        $producto->delete();
+
+        return redirect('/productos/listado');
+    }
 }

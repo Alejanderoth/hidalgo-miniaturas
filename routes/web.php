@@ -19,4 +19,6 @@ Route::get('/productos/{id}/editar', [ProductController::class, 'edit']);
 
 Route::put('/productos/{id}', [ProductController::class, 'update']);
 
+Route::delete('/productos/{id}', [ProductController::class, 'destroy']);
+
 Route::get('/productos/{id}', [ProductController::class, 'show']);

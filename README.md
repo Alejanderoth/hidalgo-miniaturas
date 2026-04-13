@@ -54,7 +54,7 @@ Inserción de datos de prueba
 
 
 
-\### Fase 3 - Backend (en proceso)
+\### Fase 3 - Backend ✔️
 
 
 
@@ -66,7 +66,7 @@ Definición de rutas
 
 
 
-\### Fase 4 - Frontend (pendiente)
+\### Fase 4 - Frontend ✔️
 
 
 
@@ -77,8 +77,4 @@ Consulta de productos
 Edición de productos
 
 Eliminación de productos
-
-
-
-
 
