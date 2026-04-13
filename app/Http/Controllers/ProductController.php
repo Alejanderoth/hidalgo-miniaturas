@@ -26,4 +26,11 @@ class ProductController extends Controller
 
         return response()->json($producto);
     }
+
+    public function listado()
+    {
+        $productos = Product::all();
+
+        return view('productos.listado', compact('productos'));
+    }
 }

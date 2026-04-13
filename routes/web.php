@@ -9,4 +9,6 @@ Route::get('/', function () {
 
 Route::get('/productos', [ProductController::class, 'index']);
 
+Route::get('/productos/listado', [ProductController::class, 'listado']);
+
 Route::get('/productos/{id}', [ProductController::class, 'show']);
