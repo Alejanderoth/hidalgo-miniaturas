@@ -33,4 +33,22 @@ class ProductController extends Controller
 
         return view('productos.listado', compact('productos'));
     }
+
+    public function create()
+    {
+        return view('productos.crear');
+    }
+
+    public function store(Request $request)
+    {
+        Product::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'stock' => $request->stock,
+            'imagen' => $request->imagen,
+        ]);
+
+        return redirect('/productos/listado');
+    }
 }
