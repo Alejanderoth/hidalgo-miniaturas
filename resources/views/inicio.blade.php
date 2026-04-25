@@ -12,8 +12,8 @@
     <h2>Menú principal</h2>
     <ul>
         <li><a href="/productos">Ver productos en JSON</a></li>
-        <li><a href="/productos/listado">Ver listado de productos</a></li>
-        <li><a href="/productos/crear">Crear nuevo producto</a></li>
+        <li><a href="/panel/productos">Panel de productos</a></li>
+        <li><a href="/panel/productos/crear">Crear nuevo producto</a></li>
     </ul>
 </body>
 </html>

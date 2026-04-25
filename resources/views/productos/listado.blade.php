@@ -9,6 +9,10 @@
 <h1>Listado de productos</h1>
 
 <a href="/">Volver al inicio</a>
+<br><br>
+
+<a href="/panel/productos/crear">Crear producto</a>
+<br><br>
 
 <table border="1">
     <thead>
@@ -32,8 +36,8 @@
                 <td>{{ $producto->stock }}</td>
                 <td>{{ $producto->imagen }}</td>
                 <td>
-                    <a href="/productos/{{ $producto->id }}/editar" >Editar</a>
-                    <form action="/productos/{{ $producto->id }}" method="POST" style="display:inline;">
+                    <a href="/panel/productos/{{ $producto->id }}/editar">Editar</a>
+                    <form action="/panel/productos/{{ $producto->id }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Eliminar</button>

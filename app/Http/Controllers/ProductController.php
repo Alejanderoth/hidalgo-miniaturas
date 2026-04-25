@@ -49,7 +49,7 @@ class ProductController extends Controller
             'imagen' => $request->imagen,
         ]);
 
-        return redirect('/productos/listado');
+        return redirect('/panel/productos');
     }
 
     public function edit($id)
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $producto = Product::find($id);
 
         if (!$producto) {
-            return redirect('/productos/listado');
+            return redirect('/panel/productos');
         }
 
         return view('productos.editar', compact('producto'));
@@ -68,7 +68,7 @@ class ProductController extends Controller
         $producto = Product::find($id);
 
         if (!$producto) {
-            return redirect('/productos/listado');
+            return redirect('/panel/productos');
         }
 
         $producto->update([
@@ -79,7 +79,7 @@ class ProductController extends Controller
             'imagen' => $request->imagen,
         ]);
 
-        return redirect('/productos/listado');
+        return redirect('/panel/productos');
     }
 
     public function destroy($id)
@@ -87,11 +87,11 @@ class ProductController extends Controller
         $producto = Product::find($id);
 
         if (!$producto) {
-            return redirect('/productos/listado');
+            return redirect('/panel/productos');
         }
 
         $producto->delete();
 
-        return redirect('/productos/listado');
+        return redirect('/panel/productos');
     }
 }

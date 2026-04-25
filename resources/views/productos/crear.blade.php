@@ -10,9 +10,9 @@
 
 <a href="/">Volver al inicio</a>
 <br><br>
-<a href="/productos/listado">Ver listado de productos</a>
+<a href="/panel/productos">Ver listado de productos</a>
 
-<form action="/productos" method="POST">
+<form action="/panel/productos" method="POST">
     @csrf
 
     <label for="nombre">Nombre:</label><br>

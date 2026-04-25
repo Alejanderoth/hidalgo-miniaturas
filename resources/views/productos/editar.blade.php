@@ -10,9 +10,9 @@
 
 <a href="/">Volver al inicio</a>
 <br><br>
-<a href="/productos/listado">Volver al listado</a>
+<a href="/panel/productos">Volver al listado</a>
 
-<form action="/productos/{{ $producto->id }}" method="POST">
+<form action="/panel/productos/{{ $producto->id }}" method="POST">
     @csrf
     @method('PUT')
 
