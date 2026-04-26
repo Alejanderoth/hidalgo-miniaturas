@@ -1,26 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
-    return view('inicio');
+    return view('welcome');
 });
 
-// Rutas públicas
-Route::get('/productos', [ProductController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/productos/{id}', [ProductController::class, 'show']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-// Rutas internas del panel
-Route::get('/panel/productos', [ProductController::class, 'listado']);
-
-Route::get('/panel/productos/crear', [ProductController::class, 'create']);
-
-Route::post('/panel/productos', [ProductController::class, 'store']);
-
-Route::get('/panel/productos/{id}/editar', [ProductController::class, 'edit']);
-
-Route::put('/panel/productos/{id}', [ProductController::class, 'update']);
-
-Route::delete('/panel/productos/{id}', [ProductController::class, 'destroy']);
+require __DIR__.'/auth.php';
