@@ -23,6 +23,7 @@
             <th>Precio</th>
             <th>Stock</th>
             <th>Imagen</th>
+            <th>Activo</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -40,6 +41,9 @@
                 @else
                     Sin imagen
                 @endif
+                </td>
+                <td>
+                    {{ $producto->activo ? 'Sí' : 'No' }}
                 </td>
                 <td>
                     <a href="/panel/productos/{{ $producto->id }}/editar">Editar</a>

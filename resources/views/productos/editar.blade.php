@@ -42,6 +42,13 @@
     <label for="imagen">Nombre de la imagen:</label><br>
     <input type="text" name="imagen" id="imagen" value="{{ old('imagen', $producto->imagen) }}"><br><br>
 
+    <label for="activo">Activo:</label><br>
+    <select name="activo" id="activo">
+    <option value="1" {{ old('activo', $producto->activo) == '1' ? 'selected' : '' }}>Sí</option>
+    <option value="0" {{ old('activo', $producto->activo) == '0' ? 'selected' : '' }}>No</option>
+    </select>
+    <br><br>
+
     <button type="submit">Actualizar producto</button>
 </form>
 

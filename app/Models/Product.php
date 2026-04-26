@@ -14,5 +14,6 @@ class Product extends Model
         'precio',
         'stock',
         'imagen',
+        'activo',
     ];
 }

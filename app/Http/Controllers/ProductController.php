@@ -47,6 +47,7 @@ class ProductController extends Controller
         'precio' => 'required|numeric|min:0',
         'stock' => 'required|integer|min:0',
         'imagen' => 'nullable|string|max:255',
+        'activo' => 'required|boolean',
     ]);
 
     Product::create([
@@ -55,6 +56,7 @@ class ProductController extends Controller
         'precio' => $request->precio,
         'stock' => $request->stock,
         'imagen' => $request->imagen,
+        'activo' => $request->activo,
     ]);
 
     return redirect('/panel/productos');
@@ -79,6 +81,7 @@ class ProductController extends Controller
         'precio' => 'required|numeric|min:0',
         'stock' => 'required|integer|min:0',
         'imagen' => 'nullable|string|max:255',
+        'activo' => 'required|boolean',
     ]);
 
     $producto = Product::find($id);
@@ -93,6 +96,7 @@ class ProductController extends Controller
         'precio' => $request->precio,
         'stock' => $request->stock,
         'imagen' => $request->imagen,
+        'activo' => $request->activo,
     ]);
 
     return redirect('/panel/productos');
