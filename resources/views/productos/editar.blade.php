@@ -39,7 +39,7 @@
     <label for="stock">Stock:</label><br>
     <input type="number" name="stock" id="stock" value="{{ old('stock', $producto->stock) }}"><br><br>
 
-    <label for="imagen">Imagen:</label><br>
+    <label for="imagen">Nombre de la imagen:</label><br>
     <input type="text" name="imagen" id="imagen" value="{{ old('imagen', $producto->imagen) }}"><br><br>
 
     <button type="submit">Actualizar producto</button>

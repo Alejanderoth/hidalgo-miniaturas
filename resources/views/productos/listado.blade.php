@@ -34,7 +34,13 @@
                 <td>{{ $producto->descripcion }}</td>
                 <td>{{ $producto->precio }}</td>
                 <td>{{ $producto->stock }}</td>
-                <td>{{ $producto->imagen }}</td>
+                <td>
+                @if($producto->imagen)
+                    <img src="{{ asset('img/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" width="80">
+                @else
+                    Sin imagen
+                @endif
+                </td>
                 <td>
                     <a href="/panel/productos/{{ $producto->id }}/editar">Editar</a>
                     <form action="/panel/productos/{{ $producto->id }}" method="POST" style="display:inline;">
