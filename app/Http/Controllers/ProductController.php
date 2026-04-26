@@ -41,15 +41,23 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        Product::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'precio' => $request->precio,
-            'stock' => $request->stock,
-            'imagen' => $request->imagen,
-        ]);
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'precio' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'imagen' => 'nullable|string|max:255',
+    ]);
 
-        return redirect('/panel/productos');
+    Product::create([
+        'nombre' => $request->nombre,
+        'descripcion' => $request->descripcion,
+        'precio' => $request->precio,
+        'stock' => $request->stock,
+        'imagen' => $request->imagen,
+    ]);
+
+    return redirect('/panel/productos');
     }
 
     public function edit($id)
@@ -65,21 +73,29 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $producto = Product::find($id);
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'precio' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'imagen' => 'nullable|string|max:255',
+    ]);
 
-        if (!$producto) {
-            return redirect('/panel/productos');
-        }
+    $producto = Product::find($id);
 
-        $producto->update([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'precio' => $request->precio,
-            'stock' => $request->stock,
-            'imagen' => $request->imagen,
-        ]);
-
+    if (!$producto) {
         return redirect('/panel/productos');
+    }
+
+    $producto->update([
+        'nombre' => $request->nombre,
+        'descripcion' => $request->descripcion,
+        'precio' => $request->precio,
+        'stock' => $request->stock,
+        'imagen' => $request->imagen,
+    ]);
+
+    return redirect('/panel/productos');
     }
 
     public function destroy($id)
