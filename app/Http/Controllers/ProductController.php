@@ -118,4 +118,13 @@ class ProductController extends Controller
 
         return redirect('/panel/productos');
     }
+
+    public function catalogo()
+    {
+    $productos = Product::with('category')
+        ->where('activo', 1)
+        ->get();
+
+    return view('productos.catalogo', compact('productos'));
+    }
 }

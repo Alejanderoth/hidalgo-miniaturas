@@ -11,6 +11,7 @@ Route::get('/', function () {
 // Rutas públicas de productos
 Route::get('/productos', [ProductController::class, 'index']);
 Route::get('/productos/{id}', [ProductController::class, 'show']);
+Route::get('/catalogo', [ProductController::class, 'catalogo']);
 
 // Dashboard de Breeze
 Route::get('/dashboard', function () {
