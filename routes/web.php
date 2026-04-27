@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rutas internas protegidas del panel
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:empleado,administrador'])->group(function () {
     Route::get('/panel/productos', [ProductController::class, 'listado']);
     Route::get('/panel/productos/crear', [ProductController::class, 'create']);
     Route::post('/panel/productos', [ProductController::class, 'store']);
