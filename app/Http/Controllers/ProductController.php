@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -36,12 +37,15 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('productos.crear');
+    $categories = Category::all();
+
+    return view('productos.crear', compact('categories'));
     }
 
     public function store(Request $request)
     {
     $request->validate([
+        'categoria_id' => 'required|exists:categories,id',
         'nombre' => 'required|string|max:255',
         'descripcion' => 'required|string',
         'precio' => 'required|numeric|min:0',
@@ -51,6 +55,7 @@ class ProductController extends Controller
     ]);
 
     Product::create([
+        'categoria_id' => $request->categoria_id,
         'nombre' => $request->nombre,
         'descripcion' => $request->descripcion,
         'precio' => $request->precio,
@@ -64,18 +69,16 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $producto = Product::find($id);
+    $producto = Product::find($id);
+    $categories = Category::all();
 
-        if (!$producto) {
-            return redirect('/panel/productos');
-        }
-
-        return view('productos.editar', compact('producto'));
+    return view('productos.editar', compact('producto', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
     $request->validate([
+        'categoria_id' => 'required|exists:categories,id',
         'nombre' => 'required|string|max:255',
         'descripcion' => 'required|string',
         'precio' => 'required|numeric|min:0',
@@ -91,6 +94,7 @@ class ProductController extends Controller
     }
 
     $producto->update([
+        'categoria_id' => $request->categoria_id,
         'nombre' => $request->nombre,
         'descripcion' => $request->descripcion,
         'precio' => $request->precio,

@@ -27,6 +27,18 @@
     @csrf
     @method('PUT')
 
+    <!-- SELECT DE CATEGORÍA (AÑADIDO) -->
+    <label for="categoria_id">Categoría:</label><br>
+    <select name="categoria_id" id="categoria_id">
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}" 
+                {{ old('categoria_id', $producto->categoria_id) == $category->id ? 'selected' : '' }}>
+                {{ $category->nombre }}
+            </option>
+        @endforeach
+    </select>
+    <br><br>
+
     <label for="nombre">Nombre:</label><br>
     <input type="text" name="nombre" id="nombre" value="{{ old('nombre', $producto->nombre) }}"><br><br>
 
@@ -44,8 +56,8 @@
 
     <label for="activo">Activo:</label><br>
     <select name="activo" id="activo">
-    <option value="1" {{ old('activo', $producto->activo) == '1' ? 'selected' : '' }}>Sí</option>
-    <option value="0" {{ old('activo', $producto->activo) == '0' ? 'selected' : '' }}>No</option>
+        <option value="1" {{ old('activo', $producto->activo) == '1' ? 'selected' : '' }}>Sí</option>
+        <option value="0" {{ old('activo', $producto->activo) == '0' ? 'selected' : '' }}>No</option>
     </select>
     <br><br>
 
