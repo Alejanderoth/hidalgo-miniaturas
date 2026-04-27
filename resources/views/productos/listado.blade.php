@@ -18,12 +18,12 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Categoría</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Precio</th>
             <th>Stock</th>
             <th>Imagen</th>
-            <th>Activo</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -31,6 +31,7 @@
         @foreach($productos as $producto)
             <tr>
                 <td>{{ $producto->id }}</td>
+                <td>{{ $producto->category ? $producto->category->nombre : 'Sin categoría' }}</td>
                 <td>{{ $producto->nombre }}</td>
                 <td>{{ $producto->descripcion }}</td>
                 <td>{{ $producto->precio }}</td>

@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function listado()
     {
-        $productos = Product::all();
+        $productos = Product::with('category')->get();
 
         return view('productos.listado', compact('productos'));
     }
