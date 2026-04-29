@@ -285,4 +285,9 @@ class ProductController extends Controller
 
         return redirect('/panel/pedidos');
     }
+
+    public function panel()
+    {
+        return view('panel.index');
+    }
 }

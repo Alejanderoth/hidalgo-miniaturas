@@ -42,6 +42,8 @@ Route::middleware(['auth', 'role:empleado,administrador'])->group(function () {
     Route::delete('/panel/productos/{id}', [ProductController::class, 'destroy']);
     Route::get('/panel/pedidos', [ProductController::class, 'panelPedidos']);
     Route::put('/panel/pedidos/{id}/estado', [ProductController::class, 'actualizarEstadoPedido']);
+    Route::get('/panel', [ProductController::class, 'panel']);
     });
+    
 
 require __DIR__.'/auth.php';
