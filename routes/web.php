@@ -15,6 +15,7 @@ Route::get('/catalogo', [ProductController::class, 'catalogo']);
 Route::get('/carrito', [ProductController::class, 'verCarrito']);
 Route::post('/carrito/agregar/{id}', [ProductController::class, 'añadirCarrito']);
 Route::put('/carrito/actualizar/{id}', [ProductController::class, 'actualizarCarrito']);
+Route::delete('/carrito/eliminar/{id}', [ProductController::class, 'eliminarDelCarrito']);
 
 // Dashboard de Breeze
 Route::get('/dashboard', function () {

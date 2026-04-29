@@ -25,6 +25,7 @@
                 <th>Precio unitario</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@
                     </td>
                     <td>{{ $producto['nombre'] }}</td>
                     <td>{{ number_format($producto['precio'], 2) }} €</td>
+                    
                     <td>
                         <form action="/carrito/actualizar/{{ $id }}" method="POST">
                             @csrf
@@ -48,6 +50,13 @@
                         </form>
                     </td>
                     <td>{{ number_format($producto['precio'] * $producto['cantidad'], 2) }} €</td>
+                    <td>
+                        <form action="/carrito/eliminar/{{ $id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

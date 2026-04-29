@@ -181,4 +181,16 @@ class ProductController extends Controller
 
         return redirect('/carrito');
     }
+
+    public function eliminarDelCarrito($id)
+    {
+        $carrito = session()->get('carrito', []);
+
+        if (isset($carrito[$id])) {
+            unset($carrito[$id]);
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect('/carrito');
+    }
 }
