@@ -13,8 +13,10 @@
     <ul>
         <li><a href="/productos">Ver productos en JSON</a></li>
         <li><a href="/panel/productos">Panel de productos</a></li>
+        <li><a href="/mis-pedidos">Mis pedidos</a></li>
         <li><a href="/panel/productos/crear">Crear nuevo producto</a></li>
         <li><a href="/catalogo">Ver catálogo</a></li>
+        <li><a href="/panel/pedidos">Panel de pedidos</a></li>
     </ul>
 </body>
 </html>

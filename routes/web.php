@@ -40,6 +40,8 @@ Route::middleware(['auth', 'role:empleado,administrador'])->group(function () {
     Route::get('/panel/productos/{id}/editar', [ProductController::class, 'edit']);
     Route::put('/panel/productos/{id}', [ProductController::class, 'update']);
     Route::delete('/panel/productos/{id}', [ProductController::class, 'destroy']);
-});
+    Route::get('/panel/pedidos', [ProductController::class, 'panelPedidos']);
+    Route::put('/panel/pedidos/{id}/estado', [ProductController::class, 'actualizarEstadoPedido']);
+    });
 
 require __DIR__.'/auth.php';

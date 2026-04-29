@@ -259,4 +259,30 @@ class ProductController extends Controller
 
         return view('pedidos.mis-pedidos', compact('pedidos'));
     }
+
+    public function panelPedidos()
+    {
+        $pedidos = Pedido::with('user', 'detalles.producto')->get();
+
+        return view('pedidos.panel', compact('pedidos'));
+    }
+
+    public function actualizarEstadoPedido(Request $request, $id)
+    {
+        $request->validate([
+            'estado' => 'required|in:pendiente,preparacion,enviado,completado,cancelado',
+        ]);
+
+        $pedido = Pedido::find($id);
+
+        if (!$pedido) {
+            return redirect('/panel/pedidos');
+        }
+
+        $pedido->update([
+            'estado' => $request->estado,
+        ]);
+
+        return redirect('/panel/pedidos');
+    }
 }

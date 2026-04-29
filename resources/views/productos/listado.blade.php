@@ -14,6 +14,9 @@
 <a href="/panel/productos/crear">Crear producto</a>
 <br><br>
 
+<a href="/panel/pedidos">Ver pedidos</a>
+<br><br>
+
 <table border="1">
     <thead>
         <tr>

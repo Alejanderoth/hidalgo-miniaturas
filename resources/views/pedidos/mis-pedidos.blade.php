@@ -11,6 +11,8 @@
 <a href="/">Volver al inicio</a>
 <br><br>
 <a href="/catalogo">Volver al catálogo</a>
+<br><br>
+<a href="/carrito">Ver carrito</a>
 
 <hr>
 
