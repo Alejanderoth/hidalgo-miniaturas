@@ -130,9 +130,14 @@ class ProductController extends Controller
 
     public function verCarrito()
     {
-    $carrito = session()->get('carrito', []);
+        $carrito = session()->get('carrito', []);
+        $total = 0;
 
-    return view('carrito.index', compact('carrito'));
+        foreach ($carrito as $producto) {
+            $total += $producto['precio'] * $producto['cantidad'];
+        }
+
+        return view('carrito.index', compact('carrito', 'total'));
     }
 
     public function añadirCarrito($id)

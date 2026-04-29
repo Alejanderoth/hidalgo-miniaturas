@@ -17,17 +17,36 @@
 @if(empty($carrito))
     <p>El carrito está vacío.</p>
 @else
-    @foreach($carrito as $id => $producto)
-        <div style="border:1px solid black; margin-bottom:10px; padding:10px;">
-            @if($producto['imagen'])
-                <img src="{{ asset('img/productos/' . $producto['imagen']) }}" width="80">
-            @endif
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio unitario</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($carrito as $id => $producto)
+                <tr>
+                    <td>
+                        @if($producto['imagen'])
+                            <img src="{{ asset('img/productos/' . $producto['imagen']) }}" width="80">
+                        @else
+                            Sin imagen
+                        @endif
+                    </td>
+                    <td>{{ $producto['nombre'] }}</td>
+                    <td>{{ number_format($producto['precio'], 2) }} €</td>
+                    <td>{{ $producto['cantidad'] }}</td>
+                    <td>{{ number_format($producto['precio'] * $producto['cantidad'], 2) }} €</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-            <p><strong>{{ $producto['nombre'] }}</strong></p>
-            <p>Precio: {{ $producto['precio'] }} €</p>
-            <p>Cantidad: {{ $producto['cantidad'] }}</p>
-        </div>
-    @endforeach
+    <h3>Total: {{ number_format($total, 2) }} €</h3>
 @endif
 
 </body>
