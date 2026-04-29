@@ -165,4 +165,20 @@ class ProductController extends Controller
 
         return redirect('/carrito');
     }
+
+    public function actualizarCarrito(Request $request, $id)
+    {
+        $request->validate([
+            'cantidad' => 'required|integer|min:1',
+        ]);
+
+        $carrito = session()->get('carrito', []);
+
+        if (isset($carrito[$id])) {
+            $carrito[$id]['cantidad'] = $request->cantidad;
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect('/carrito');
+    }
 }

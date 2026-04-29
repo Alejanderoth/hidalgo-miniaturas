@@ -39,7 +39,14 @@
                     </td>
                     <td>{{ $producto['nombre'] }}</td>
                     <td>{{ number_format($producto['precio'], 2) }} €</td>
-                    <td>{{ $producto['cantidad'] }}</td>
+                    <td>
+                        <form action="/carrito/actualizar/{{ $id }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="number" name="cantidad" value="{{ $producto['cantidad'] }}" min="1">
+                            <button type="submit">Actualizar</button>
+                        </form>
+                    </td>
                     <td>{{ number_format($producto['precio'] * $producto['cantidad'], 2) }} €</td>
                 </tr>
             @endforeach
