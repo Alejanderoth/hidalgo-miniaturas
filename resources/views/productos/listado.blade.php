@@ -24,6 +24,7 @@
             <th>Precio</th>
             <th>Stock</th>
             <th>Imagen</th>
+            <th>Activo</th>
             <th>Acciones</th>
         </tr>
     </thead>

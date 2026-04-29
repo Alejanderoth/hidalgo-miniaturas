@@ -127,4 +127,11 @@ class ProductController extends Controller
 
     return view('productos.catalogo', compact('productos'));
     }
+
+    public function verCarrito()
+    {
+    $carrito = session()->get('carrito', []);
+
+    return view('carrito.index', compact('carrito'));
+    }
 }

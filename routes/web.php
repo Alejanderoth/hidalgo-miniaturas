@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::get('/productos', [ProductController::class, 'index']);
 Route::get('/productos/{id}', [ProductController::class, 'show']);
 Route::get('/catalogo', [ProductController::class, 'catalogo']);
+Route::get('/carrito', [ProductController::class, 'verCarrito']);
 
 // Dashboard de Breeze
 Route::get('/dashboard', function () {
