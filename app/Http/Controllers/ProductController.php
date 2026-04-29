@@ -204,39 +204,52 @@ class ProductController extends Controller
     }
 
     public function confirmarPedido()
-    {
-        $carrito = session()->get('carrito', []);
+{
+    $carrito = session()->get('carrito', []);
 
-        if (empty($carrito)) {
+    if (empty($carrito)) {
+        return redirect('/carrito');
+    }
+
+    foreach ($carrito as $id => $item) {
+        $producto = Product::find($id);
+
+        if (!$producto || !$producto->activo || $producto->stock < $item['cantidad']) {
             return redirect('/carrito');
         }
+    }
 
-        $total = 0;
+    $total = 0;
 
-        foreach ($carrito as $producto) {
-            $total += $producto['precio'] * $producto['cantidad'];
-        }
+    foreach ($carrito as $producto) {
+        $total += $producto['precio'] * $producto['cantidad'];
+    }
 
-        $pedido = Pedido::create([
-            'user_id' => auth()->id(),
-            'estado' => 'pendiente',
-            'total' => $total,
+    $pedido = Pedido::create([
+        'user_id' => auth()->id(),
+        'estado' => 'pendiente',
+        'total' => $total,
+    ]);
+
+    foreach ($carrito as $id => $item) {
+        $producto = Product::find($id);
+
+        DetallePedido::create([
+            'pedido_id' => $pedido->id,
+            'producto_id' => $id,
+            'cantidad' => $item['cantidad'],
+            'precio_unitario' => $item['precio'],
+            'subtotal' => $item['precio'] * $item['cantidad'],
         ]);
 
-        foreach ($carrito as $id => $producto) {
-            DetallePedido::create([
-                'pedido_id' => $pedido->id,
-                'producto_id' => $id,
-                'cantidad' => $producto['cantidad'],
-                'precio_unitario' => $producto['precio'],
-                'subtotal' => $producto['precio'] * $producto['cantidad'],
-            ]);
-        }
-
-        session()->forget('carrito');
-
-        return redirect('/mis-pedidos');
+        $producto->stock -= $item['cantidad'];
+        $producto->save();
     }
+
+    session()->forget('carrito');
+
+    return redirect('/mis-pedidos');
+}
 
     public function misPedidos()
     {
