@@ -134,4 +134,30 @@ class ProductController extends Controller
 
     return view('carrito.index', compact('carrito'));
     }
+
+    public function añadirCarrito($id)
+    {
+    $producto = Product::find($id);
+
+        if (!$producto || !$producto->activo) {
+            return redirect('/catalogo');
+        }
+
+        $carrito = session()->get('carrito', []);
+
+        if (isset($carrito[$id])) {
+            $carrito[$id]['cantidad']++;
+        } else {
+            $carrito[$id] = [
+                'nombre' => $producto->nombre,
+                'precio' => $producto->precio,
+                'cantidad' => 1,
+                'imagen' => $producto->imagen,
+            ];
+        }
+
+        session()->put('carrito', $carrito);
+
+        return redirect('/carrito');
+    }
 }

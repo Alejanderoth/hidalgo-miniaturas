@@ -19,6 +19,10 @@
 @else
     @foreach($carrito as $id => $producto)
         <div style="border:1px solid black; margin-bottom:10px; padding:10px;">
+            @if($producto['imagen'])
+                <img src="{{ asset('img/productos/' . $producto['imagen']) }}" width="80">
+            @endif
+
             <p><strong>{{ $producto['nombre'] }}</strong></p>
             <p>Precio: {{ $producto['precio'] }} €</p>
             <p>Cantidad: {{ $producto['cantidad'] }}</p>

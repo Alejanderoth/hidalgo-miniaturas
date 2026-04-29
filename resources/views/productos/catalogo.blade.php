@@ -36,6 +36,10 @@
             <!-- DATOS -->
             <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
             <p><strong>Precio:</strong> {{ $producto->precio }} €</p>
+            <form action="/carrito/agregar/{{ $producto->id }}" method="POST">
+                @csrf
+                <button type="submit">Añadir al carrito</button>
+            </form>
 
         </div>
     @endforeach
