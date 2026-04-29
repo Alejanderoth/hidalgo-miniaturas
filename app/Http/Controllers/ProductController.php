@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Pedido;
+use App\Models\DetallePedido;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -199,5 +201,49 @@ class ProductController extends Controller
         session()->forget('carrito');
 
         return redirect('/carrito');
+    }
+
+    public function confirmarPedido()
+    {
+        $carrito = session()->get('carrito', []);
+
+        if (empty($carrito)) {
+            return redirect('/carrito');
+        }
+
+        $total = 0;
+
+        foreach ($carrito as $producto) {
+            $total += $producto['precio'] * $producto['cantidad'];
+        }
+
+        $pedido = Pedido::create([
+            'user_id' => auth()->id(),
+            'estado' => 'pendiente',
+            'total' => $total,
+        ]);
+
+        foreach ($carrito as $id => $producto) {
+            DetallePedido::create([
+                'pedido_id' => $pedido->id,
+                'producto_id' => $id,
+                'cantidad' => $producto['cantidad'],
+                'precio_unitario' => $producto['precio'],
+                'subtotal' => $producto['precio'] * $producto['cantidad'],
+            ]);
+        }
+
+        session()->forget('carrito');
+
+        return redirect('/mis-pedidos');
+    }
+
+    public function misPedidos()
+    {
+        $pedidos = Pedido::where('user_id', auth()->id())
+            ->with('detalles.producto')
+            ->get();
+
+        return view('pedidos.mis-pedidos', compact('pedidos'));
     }
 }

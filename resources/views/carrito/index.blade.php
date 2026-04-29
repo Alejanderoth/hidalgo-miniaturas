@@ -64,11 +64,18 @@
     </table>
 
     <h3>Total: {{ number_format($total, 2) }} €</h3>
+
     <form action="/carrito/vaciar" method="POST">
     @csrf
     @method('DELETE')
     <button type="submit">Vaciar carrito</button>
     </form>
+    <br>
+    <form action="/pedido/confirmar" method="POST">
+        @csrf
+        <button type="submit">Confirmar pedido</button>
+    </form>
+    <br>
 @endif
 
 </body>
