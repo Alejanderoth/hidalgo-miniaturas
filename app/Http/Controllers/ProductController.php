@@ -193,4 +193,11 @@ class ProductController extends Controller
 
         return redirect('/carrito');
     }
+
+    public function vaciarCarrito()
+    {
+        session()->forget('carrito');
+
+        return redirect('/carrito');
+    }
 }

@@ -57,12 +57,18 @@
                         <button type="submit">Eliminar</button>
                         </form>
                     </td>
+                    
                 </tr>
             @endforeach
         </tbody>
     </table>
 
     <h3>Total: {{ number_format($total, 2) }} €</h3>
+    <form action="/carrito/vaciar" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit">Vaciar carrito</button>
+    </form>
 @endif
 
 </body>
