@@ -22,7 +22,7 @@
 
         <!-- CLIENTE -->
         @if(auth()->user()->role && auth()->user()->role->nombre === 'cliente')
-            <li><a href="/mis-pedidos">Mis pedidos</a></li>
+            <li><a href="/mi-cuenta">Mi cuenta</a></li>
         @endif
 
         <!-- EMPLEADO / ADMIN -->

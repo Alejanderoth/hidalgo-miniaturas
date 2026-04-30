@@ -325,4 +325,15 @@ class ProductController extends Controller
 
         return view('inicio', compact('categories'));
     }
+
+    public function miCuenta()
+    {
+        $user = auth()->user();
+
+        $pedidos = Pedido::where('user_id', $user->id)
+            ->with('detalles.producto')
+            ->get();
+
+        return view('usuarios.mi-cuenta', compact('user', 'pedidos'));
+    }
 }
