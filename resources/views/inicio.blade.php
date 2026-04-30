@@ -40,6 +40,16 @@
 
 </ul>
 
+<h2>Categorías</h2>
+
+<ul>
+    @foreach($categories as $category)
+        <li>
+            <a href="/categoria/{{ $category->id }}">{{ $category->nombre }}</a>
+        </li>
+    @endforeach
+</ul>
+
 <hr>
 
 @auth

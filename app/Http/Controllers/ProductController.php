@@ -318,4 +318,11 @@ class ProductController extends Controller
 
     return view('productos.catalogo', compact('productos', 'categoria'));
     }
+
+    public function inicio()
+    {
+        $categories = Category::all();
+
+        return view('inicio', compact('categories'));
+    }
 }
