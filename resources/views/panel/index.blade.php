@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel interno</title>
-</head>
-<body>
+@extends('layouts.panel')
 
-<h1>Panel interno</h1>
+@section('content')
 
-<p>Zona de gestión interna.</p>
+<h2>Panel interno</h2>
 
-<hr>
+<div class="grid">
+    <a class="categoria-card" href="/panel/productos">Gestión de productos</a>
+    <a class="categoria-card" href="/panel/pedidos">Gestión de pedidos</a>
+</div>
 
-<ul>
-    <li><a href="/panel/productos">Gestión de productos</a></li>
-    <li><a href="/panel/pedidos">Gestión de pedidos</a></li>
-</ul>
-
-<a href="/">Volver al inicio</a>
-
-</body>
-</html>
+@endsection

@@ -1,67 +1,44 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Listado de productos</title>
-</head>
-<body>
+@extends('layouts.panel')
 
-<h1>Listado de productos</h1>
+@section('content')
 
-<a href="/">Volver al inicio</a>
-<br><br>
+<h2>Gestión de productos</h2>
 
-<a href="/panel/productos/crear">Crear producto</a>
-<br><br>
+<a class="boton" href="/panel/productos/crear">Crear producto</a>
 
-<a href="/panel/pedidos">Ver pedidos</a>
-<br><br>
+<table class="tabla">
 
-<table border="1">
-    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Activo</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach($productos as $producto)
         <tr>
-            <th>ID</th>
-            <th>Categoría</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Imagen</th>
-            <th>Activo</th>
-            <th>Acciones</th>
+            <td>{{ $producto->id }}</td>
+            <td>{{ $producto->nombre }}</td>
+            <td>{{ $producto->category ? $producto->category->nombre : '-' }}</td>
+            <td>{{ $producto->precio }} €</td>
+            <td>{{ $producto->stock }}</td>
+            <td>{{ $producto->activo ? 'Sí' : 'No' }}</td>
+
+            <td>
+                <a href="/panel/productos/{{ $producto->id }}/editar">Editar</a>
+
+                <form action="/panel/productos/{{ $producto->id }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button>Eliminar</button>
+                </form>
+            </td>
         </tr>
-    </thead>
-    <tbody>
-        @foreach($productos as $producto)
-            <tr>
-                <td>{{ $producto->id }}</td>
-                <td>{{ $producto->category ? $producto->category->nombre : 'Sin categoría' }}</td>
-                <td>{{ $producto->nombre }}</td>
-                <td>{{ $producto->descripcion }}</td>
-                <td>{{ $producto->precio }}</td>
-                <td>{{ $producto->stock }}</td>
-                <td>
-                @if($producto->imagen)
-                    <img src="{{ asset('img/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" width="80">
-                @else
-                    Sin imagen
-                @endif
-                </td>
-                <td>
-                    {{ $producto->activo ? 'Sí' : 'No' }}
-                </td>
-                <td>
-                    <a href="/panel/productos/{{ $producto->id }}/editar">Editar</a>
-                    <form action="/panel/productos/{{ $producto->id }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
+    @endforeach
+
 </table>
 
-</body>
-</html>
+@endsection

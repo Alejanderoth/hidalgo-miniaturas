@@ -1,84 +1,73 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Carrito</title>
-</head>
-<body>
+@extends('layouts.public')
 
-<h1>Carrito</h1>
+@section('content')
 
-<a href="/">Volver al inicio</a>
-<br><br>
-<a href="/catalogo">Volver al catálogo</a>
-<br><br>
-<a href="/mis-pedidos">Mis pedidos</a>
+<div class="container">
 
-<hr>
+    <h2>Carrito de compra</h2>
 
-@if(empty($carrito))
-    <p>El carrito está vacío.</p>
-@else
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Imagen</th>
-                <th>Producto</th>
-                <th>Precio unitario</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($carrito as $id => $producto)
-                <tr>
-                    <td>
-                        @if($producto['imagen'])
-                            <img src="{{ asset('img/productos/' . $producto['imagen']) }}" width="80">
-                        @else
-                            Sin imagen
-                        @endif
-                    </td>
-                    <td>{{ $producto['nombre'] }}</td>
-                    <td>{{ number_format($producto['precio'], 2) }} €</td>
-                    
-                    <td>
+    @if(empty($carrito))
+        <div class="carrito-vacio">
+            <p>No hay productos en el carrito.</p>
+            <a class="boton" href="/catalogo">Ir al catálogo</a>
+        </div>
+    @else
+
+        <div class="carrito-lista">
+
+            @php $total = 0; @endphp
+
+            @foreach($carrito as $id => $item)
+                @php
+                    $subtotal = $item['precio'] * $item['cantidad'];
+                    $total += $subtotal;
+                @endphp
+
+                <div class="carrito-item">
+
+                    <div class="carrito-img">
+                        <img src="{{ asset('img/productos/' . $item['imagen']) }}">
+                    </div>
+
+                    <div class="carrito-info">
+                        <h3>{{ $item['nombre'] }}</h3>
+
+                        <p>Precio: {{ number_format($item['precio'], 2) }} €</p>
+                        <p>Subtotal: {{ number_format($subtotal, 2) }} €</p>
+
                         <form action="/carrito/actualizar/{{ $id }}" method="POST">
                             @csrf
-                            @method('PUT')
-                            <input type="number" name="cantidad" value="{{ $producto['cantidad'] }}" min="1">
-                            <button type="submit">Actualizar</button>
+                            <input type="number" name="cantidad" value="{{ $item['cantidad'] }}" min="1">
+                            <button class="boton">Actualizar</button>
                         </form>
-                    </td>
-                    <td>{{ number_format($producto['precio'] * $producto['cantidad'], 2) }} €</td>
-                    <td>
+
                         <form action="/carrito/eliminar/{{ $id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
+                            @csrf
+                            <button class="boton eliminar">Eliminar</button>
                         </form>
-                    </td>
-                    
-                </tr>
+                    </div>
+
+                </div>
             @endforeach
-        </tbody>
-    </table>
 
-    <h3>Total: {{ number_format($total, 2) }} €</h3>
+        </div>
 
-    <form action="/carrito/vaciar" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit">Vaciar carrito</button>
-    </form>
-    <br>
-    <form action="/pedido/confirmar" method="POST">
-        @csrf
-        <button type="submit">Confirmar pedido</button>
-    </form>
-    <br>
-@endif
+        <div class="carrito-total">
+            <h3>Total: {{ number_format($total, 2) }} €</h3>
 
-</body>
-</html>
+            <form action="/pedido/confirmar" method="POST">
+                @csrf
+                <button class="boton">Confirmar pedido</button>
+            </form>
+
+            <form action="/carrito/vaciar" method="POST">
+                @csrf
+                <button class="boton eliminar">Vaciar carrito</button>
+            </form>
+        </div>
+
+    @endif
+
+</div>
+
+@endsection

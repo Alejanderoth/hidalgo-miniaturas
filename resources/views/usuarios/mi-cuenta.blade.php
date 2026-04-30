@@ -1,53 +1,72 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mi cuenta</title>
-</head>
-<body>
+@extends('layouts.public')
 
-<h1>Mi cuenta</h1>
+@section('content')
 
-<a href="/">Volver al inicio</a>
-<br><br>
-<a href="/catalogo">Ver catálogo</a>
+<div class="container">
 
-<hr>
+    <h2>Mi cuenta</h2>
 
-<h2>Datos del usuario</h2>
+    <div class="cuenta-grid">
 
-<p><strong>Nombre:</strong> {{ $user->name }}</p>
-<p><strong>Email:</strong> {{ $user->email }}</p>
+        <section class="cuenta-card">
+            <h3>Datos del usuario</h3>
 
-<a href="/profile">Editar datos de usuario</a>
+            <p><strong>Nombre:</strong> {{ $user->name }}</p>
+            <p><strong>Email:</strong> {{ $user->email }}</p>
 
-<hr>
+            <a class="boton" href="/profile">Editar datos</a>
+        </section>
 
-<h2>Mis pedidos</h2>
+        <section class="cuenta-card">
+            <h3>Resumen</h3>
 
-@if($pedidos->isEmpty())
-    <p>No tienes pedidos todavía.</p>
-@else
-    @foreach($pedidos as $pedido)
-        <div style="border:1px solid black; margin-bottom:20px; padding:10px;">
-            <h3>Pedido #{{ $pedido->id }}</h3>
-            <p><strong>Estado:</strong> {{ $pedido->estado }}</p>
-            <p><strong>Total:</strong> {{ number_format($pedido->total, 2) }} €</p>
-            <p><strong>Fecha:</strong> {{ $pedido->created_at }}</p>
+            <p><strong>Pedidos realizados:</strong> {{ $pedidos->count() }}</p>
 
-            <h4>Productos</h4>
-            <ul>
-                @foreach($pedido->detalles as $detalle)
-                    <li>
-                        {{ $detalle->producto ? $detalle->producto->nombre : 'Producto eliminado' }}
-                        — Cantidad: {{ $detalle->cantidad }}
-                        — Precio: {{ number_format($detalle->precio_unitario, 2) }} €
-                    </li>
-                @endforeach
-            </ul>
+            @if($pedidos->isNotEmpty())
+                <p><strong>Último pedido:</strong> #{{ $pedidos->last()->id }}</p>
+                <p><strong>Estado:</strong> {{ $pedidos->last()->estado }}</p>
+            @else
+                <p>Aún no has realizado pedidos.</p>
+            @endif
+        </section>
+
+    </div>
+
+    <h3>Histórico de pedidos</h3>
+
+    @if($pedidos->isEmpty())
+        <div class="cuenta-card">
+            <p>No tienes pedidos todavía.</p>
+            <a class="boton" href="/catalogo">Ver catálogo</a>
         </div>
-    @endforeach
-@endif
+    @else
+        <div class="pedidos-lista">
+            @foreach($pedidos as $pedido)
+                <div class="pedido-card">
+                    <div class="pedido-cabecera">
+                        <h4>Pedido #{{ $pedido->id }}</h4>
+                        <span class="estado estado-{{ $pedido->estado }}">{{ $pedido->estado }}</span>
+                    </div>
 
-</body>
-</html>
+                    <p><strong>Total:</strong> {{ number_format($pedido->total, 2) }} €</p>
+                    <p><strong>Fecha:</strong> {{ $pedido->created_at }}</p>
+
+                    <h5>Productos</h5>
+
+                    <ul>
+                        @foreach($pedido->detalles as $detalle)
+                            <li>
+                                {{ $detalle->producto ? $detalle->producto->nombre : 'Producto eliminado' }}
+                                — Cantidad: {{ $detalle->cantidad }}
+                                — Precio: {{ number_format($detalle->precio_unitario, 2) }} €
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
+</div>
+
+@endsection

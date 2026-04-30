@@ -321,9 +321,16 @@ class ProductController extends Controller
 
     public function inicio()
     {
-        $categories = Category::all();
+        $categories = Category::with(['productos' => function ($query) {
+        $query->where('activo', 1)->latest();
+        }])->get();
 
-        return view('inicio', compact('categories'));
+        $destacado = Product::with('category')
+            ->where('activo', 1)
+            ->latest()
+            ->first();
+
+        return view('inicio', compact('categories', 'destacado'));
     }
 
     public function miCuenta()

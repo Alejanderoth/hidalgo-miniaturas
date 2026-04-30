@@ -1,60 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Catálogo de productos</title>
-</head>
-<body>
+@extends('layouts.public')
 
-<h1>Catálogo de productos</h1>
+@section('content')
 
-<a href="/">Volver al inicio</a>
-
-<hr>
-
-@if($productos->isEmpty())
-    <p>No hay productos disponibles.</p>
-@else
+<div class="container">
 
     @if(isset($categoria))
-        <h2>Categoría: {{ $categoria->nombre }}</h2>
+        <h2>Catálogo - {{ $categoria->nombre }}</h2>
     @else
-        <h2>Catálogo completo</h2>
+        <h2>Catálogo de productos</h2>
     @endif
 
-    @foreach($productos as $producto)
-        <div style="border:1px solid black; margin-bottom:20px; padding:10px; width:300px;">
-            
-            <h3>
-                <a href="/producto/{{ $producto->id }}">{{ $producto->nombre }}</a>
-            </h3>
+    @if($productos->isEmpty())
+        <p>No hay productos disponibles.</p>
+    @else
 
-            <!-- IMAGEN -->
-            @if($producto->imagen)
-                <a href="/producto/{{ $producto->id }}">
-                    <img src="{{ asset('img/productos/' . $producto->imagen) }}" width="150">
-                </a>
-            @else
-                <p>Sin imagen</p>
-            @endif
+        <div class="catalogo-grid">
 
-            <!-- CATEGORÍA -->
-            <p><strong>Categoría:</strong> 
-                {{ $producto->category ? $producto->category->nombre : 'Sin categoría' }}
-            </p>
+            @foreach($productos as $producto)
+                <div class="producto-card">
 
-            <!-- DATOS -->
-            <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
-            <p><strong>Precio:</strong> {{ $producto->precio }} €</p>
-            <form action="/carrito/agregar/{{ $producto->id }}" method="POST">
-                @csrf
-                <button type="submit">Añadir al carrito</button>
-            </form>
+                    <a href="/producto/{{ $producto->id }}" class="producto-imagen">
+                        @if($producto->imagen)
+                            <img src="{{ asset('img/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
+                        @else
+                            <div class="sin-imagen">Sin imagen</div>
+                        @endif
+                    </a>
+
+                    <div class="producto-info">
+                        <p class="producto-categoria">
+                            {{ $producto->category ? $producto->category->nombre : 'Sin categoría' }}
+                        </p>
+
+                        <h3>
+                            <a href="/producto/{{ $producto->id }}">
+                                {{ $producto->nombre }}
+                            </a>
+                        </h3>
+
+                        <p class="producto-descripcion">
+                            {{ $producto->descripcion }}
+                        </p>
+
+                        <p class="producto-precio">
+                            {{ number_format($producto->precio, 2) }} €
+                        </p>
+
+                        <form action="/carrito/agregar/{{ $producto->id }}" method="POST">
+                            @csrf
+                            <button type="submit" class="boton">Añadir a la cesta</button>
+                        </form>
+                    </div>
+
+                </div>
+            @endforeach
 
         </div>
-    @endforeach
 
-@endif
+    @endif
 
-</body>
-</html>
+</div>
+
+@endsection

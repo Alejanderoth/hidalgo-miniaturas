@@ -1,69 +1,51 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - Hidalgo Miniaturas</title>
-</head>
-<body>
+@extends('layouts.public')
 
-<h1>Hidalgo Miniaturas</h1>
-<p>Sistema de digitalización para la gestión de productos.</p>
+@section('content')
 
-<h2>Menú principal</h2>
+<div class="banner">
+    <h2>Hidalgo Miniaturas</h2>
+    <p>Miniaturas históricas para coleccionismo y modelismo</p>
+</div>
 
-<ul>
+<div class="container">
 
-    <!-- PÚBLICO (todos) -->
-    <li><a href="/catalogo">Ver catálogo</a></li>
-    <li><a href="/carrito">Ver carrito</a></li>
+    <h2>Producto destacado</h2>
 
-    @auth
+    @if($destacado)
+        <div class="destacado">
+            <div>
+                <h3>{{ $destacado->nombre }}</h3>
+                <p>{{ $destacado->descripcion }}</p>
+                <p><strong>{{ number_format($destacado->precio, 2) }} €</strong></p>
+                <a class="boton" href="/producto/{{ $destacado->id }}">Ver producto</a>
+            </div>
 
-        <!-- CLIENTE -->
-        @if(auth()->user()->role && auth()->user()->role->nombre === 'cliente')
-            <li><a href="/mi-cuenta">Mi cuenta</a></li>
-        @endif
+            <div>
+                @if($destacado->imagen)
+                    <img src="{{ asset('img/productos/' . $destacado->imagen) }}" alt="{{ $destacado->nombre }}">
+                @endif
+            </div>
+        </div>
+    @endif
 
-        <!-- EMPLEADO / ADMIN -->
-        @if(auth()->user()->role && 
-            (auth()->user()->role->nombre === 'administrador' || auth()->user()->role->nombre === 'empleado'))
-            
-            <li><a href="/panel">Panel interno</a></li>
-            <li><a href="/panel/productos">Gestión de productos</a></li>
-            <li><a href="/panel/productos/crear">Crear producto</a></li>
-            <li><a href="/panel/pedidos">Gestión de pedidos</a></li>
+    <h2>Categorías</h2>
 
-        @endif
+    <div class="grid">
+        @foreach($categories as $category)
+            @php
+                $productoCategoria = $category->productos->first();
+            @endphp
 
-    @endauth
+            <a class="categoria-card" href="/categoria/{{ $category->id }}">
+                @if($productoCategoria && $productoCategoria->imagen)
+                    <img src="{{ asset('img/productos/' . $productoCategoria->imagen) }}" alt="{{ $category->nombre }}">
+                @endif
 
-</ul>
+                <span>{{ $category->nombre }}</span>
+            </a>
+        @endforeach
+    </div>
 
-<h2>Categorías</h2>
+</div>
 
-<ul>
-    @foreach($categories as $category)
-        <li>
-            <a href="/categoria/{{ $category->id }}">{{ $category->nombre }}</a>
-        </li>
-    @endforeach
-</ul>
-
-<hr>
-
-@auth
-    <p>Usuario: {{ auth()->user()->name }}</p>
-
-    <form method="POST" action="/logout">
-        @csrf
-        <button type="submit">Cerrar sesión</button>
-    </form>
-@else
-    <a href="/login">Iniciar sesión</a>
-    <br>
-    <a href="/register">Registrarse</a>
-@endauth
-
-</body>
-</html>
+@endsection
