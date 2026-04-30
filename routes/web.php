@@ -17,6 +17,9 @@ Route::delete('/carrito/eliminar/{id}', [ProductController::class, 'eliminarDelC
 Route::delete('/carrito/vaciar', [ProductController::class, 'vaciarCarrito']);
 Route::post('/pedido/confirmar', [ProductController::class, 'confirmarPedido'])->middleware('auth');
 Route::get('/mis-pedidos', [ProductController::class, 'misPedidos'])->middleware('auth');
+Route::view('/sobre-nosotros', 'info.sobre-nosotros');
+Route::view('/contacto', 'info.contacto');
+Route::view('/aviso-legal', 'info.aviso-legal');
 
 // Dashboard de Breeze
 Route::get('/dashboard', function () {

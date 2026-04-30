@@ -494,3 +494,13 @@ body {
     background: white;
     color: black;
 }
+
+.footer .bloque-info {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.footer .bloque-info:hover {
+    background: #cfcfcf;
+}

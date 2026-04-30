@@ -40,10 +40,20 @@
 <div class="footer">
 
     <div class="footer-grid">
-        <div class="bloque-info">ABOUT US</div>
-        <div class="bloque-info">CONTACTO</div>
-        <div class="bloque-info">LEGALES</div>
-    </div>
+
+    <a href="/sobre-nosotros" class="bloque-info">
+        Sobre nosotros
+    </a>
+
+    <a href="/contacto" class="bloque-info">
+        Contacto
+    </a>
+
+    <a href="/aviso-legal" class="bloque-info">
+        Aviso legal
+    </a>
+
+</div>
 
 </div>
 </body>
