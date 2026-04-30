@@ -16,6 +16,12 @@
     <p>No hay productos disponibles.</p>
 @else
 
+    @if(isset($categoria))
+        <h2>Categoría: {{ $categoria->nombre }}</h2>
+    @else
+        <h2>Catálogo completo</h2>
+    @endif
+
     @foreach($productos as $producto)
         <div style="border:1px solid black; margin-bottom:20px; padding:10px; width:300px;">
             

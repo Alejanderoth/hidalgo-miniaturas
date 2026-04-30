@@ -13,6 +13,7 @@ Route::get('/productos', [ProductController::class, 'index']);
 Route::get('/productos/{id}', [ProductController::class, 'show']);
 Route::get('/catalogo', [ProductController::class, 'catalogo']);
 Route::get('/producto/{id}', [ProductController::class, 'detalleProducto']);
+Route::get('/categoria/{id}', [ProductController::class, 'productosPorCategoria']);
 Route::get('/carrito', [ProductController::class, 'verCarrito']);
 Route::post('/carrito/agregar/{id}', [ProductController::class, 'añadirCarrito']);
 Route::put('/carrito/actualizar/{id}', [ProductController::class, 'actualizarCarrito']);

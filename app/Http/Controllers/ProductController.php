@@ -292,7 +292,7 @@ class ProductController extends Controller
     }
 
     public function detalleProducto($id)
-{
+    {
     $producto = Product::with('category')
         ->where('activo', 1)
         ->find($id);
@@ -302,5 +302,20 @@ class ProductController extends Controller
     }
 
     return view('productos.detalle', compact('producto'));
-}
+    }
+
+    public function productosPorCategoria($id)
+    {
+    $categoria = Category::find($id);
+
+    if (!$categoria) {
+        return redirect('/catalogo');
+    }
+
+    $productos = Product::where('categoria_id', $id)
+        ->where('activo', 1)
+        ->get();
+
+    return view('productos.catalogo', compact('productos', 'categoria'));
+    }
 }
