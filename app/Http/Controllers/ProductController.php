@@ -290,4 +290,17 @@ class ProductController extends Controller
     {
         return view('panel.index');
     }
+
+    public function detalleProducto($id)
+{
+    $producto = Product::with('category')
+        ->where('activo', 1)
+        ->find($id);
+
+    if (!$producto) {
+        return redirect('/catalogo');
+    }
+
+    return view('productos.detalle', compact('producto'));
+}
 }

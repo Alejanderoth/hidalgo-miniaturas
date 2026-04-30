@@ -19,11 +19,15 @@
     @foreach($productos as $producto)
         <div style="border:1px solid black; margin-bottom:20px; padding:10px; width:300px;">
             
-            <h3>{{ $producto->nombre }}</h3>
+            <h3>
+                <a href="/producto/{{ $producto->id }}">{{ $producto->nombre }}</a>
+            </h3>
 
             <!-- IMAGEN -->
             @if($producto->imagen)
-                <img src="{{ asset('img/productos/' . $producto->imagen) }}" width="150">
+                <a href="/producto/{{ $producto->id }}">
+                    <img src="{{ asset('img/productos/' . $producto->imagen) }}" width="150">
+                </a>
             @else
                 <p>Sin imagen</p>
             @endif
