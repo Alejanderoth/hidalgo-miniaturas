@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Crear producto</title>
-</head>
-<body>
+@extends('layouts.panel')
 
-<h1>Crear nuevo producto</h1>
+@section('content')
+
+<h2>Crear producto</h2>
 
 @if ($errors->any())
-    <div>
+    <div class="alerta-error">
         <strong>Se han encontrado errores:</strong>
         <ul>
             @foreach ($errors->all() as $error)
@@ -19,49 +15,49 @@
     </div>
 @endif
 
-<a href="/">Volver al inicio</a>
-<br><br>
-<a href="/panel/productos">Ver listado de productos</a>
+<div class="form-card">
 
-<form action="/panel/productos" method="POST">
-    @csrf
+    <form action="/panel/productos" method="POST">
+        @csrf
 
-    <!-- SELECT DE CATEGORÍA (AÑADIDO) -->
-    <label for="categoria_id">Categoría:</label><br>
-    <select name="categoria_id" id="categoria_id">
-        <option value="">Selecciona una categoría</option>
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}" {{ old('categoria_id') == $category->id ? 'selected' : '' }}>
-                {{ $category->nombre }}
-            </option>
-        @endforeach
-    </select>
-    <br><br>
+        <label for="categoria_id">Categoría:</label>
+        <select name="categoria_id" id="categoria_id">
+            <option value="">Selecciona una categoría</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ old('categoria_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->nombre }}
+                </option>
+            @endforeach
+        </select>
 
-    <label for="nombre">Nombre:</label><br>
-    <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"><br><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}">
 
-    <label for="descripcion">Descripción:</label><br>
-    <textarea name="descripcion" id="descripcion">{{ old('descripcion') }}</textarea><br><br>
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion" id="descripcion">{{ old('descripcion') }}</textarea>
 
-    <label for="precio">Precio:</label><br>
-    <input type="number" step="0.01" name="precio" id="precio" value="{{ old('precio') }}"><br><br>
+        <label for="precio">Precio:</label>
+        <input type="number" step="0.01" name="precio" id="precio" value="{{ old('precio') }}">
 
-    <label for="stock">Stock:</label><br>
-    <input type="number" name="stock" id="stock" value="{{ old('stock') }}"><br><br>
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" id="stock" value="{{ old('stock') }}">
 
-    <label for="imagen">Nombre de la imagen:</label><br>
-    <input type="text" name="imagen" id="imagen" value="{{ old('imagen') }}"><br><br>
+        <label for="imagen">Nombre de la imagen:</label>
+        <input type="text" name="imagen" id="imagen" value="{{ old('imagen') }}">
 
-    <label for="activo">Activo:</label><br>
-    <select name="activo" id="activo">
-        <option value="1" {{ old('activo') == '1' ? 'selected' : '' }}>Sí</option>
-        <option value="0" {{ old('activo') == '0' ? 'selected' : '' }}>No</option>
-    </select>
-    <br><br>
+        <label for="activo">Activo:</label>
+        <select name="activo" id="activo">
+            <option value="1" {{ old('activo') == '1' ? 'selected' : '' }}>Sí</option>
+            <option value="0" {{ old('activo') == '0' ? 'selected' : '' }}>No</option>
+        </select>
 
-    <button type="submit">Guardar producto</button>
-</form>
+        <div class="form-acciones">
+            <button type="submit" class="boton">Crear producto</button>
+            <a href="/panel/productos" class="boton-secundario">Volver al listado</a>
+        </div>
 
-</body>
-</html>
+    </form>
+
+</div>
+
+@endsection

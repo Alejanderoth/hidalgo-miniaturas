@@ -17,7 +17,14 @@
         <a href="/carrito">Cesta</a>
 
         @auth
+
             <a href="/mi-cuenta">Mi cuenta</a>
+
+            <form method="POST" action="/logout" style="display:inline;">
+                @csrf
+                <button type="submit" class="boton-logout">Salir</button>
+            </form>
+
         @else
             <a href="/login">Login</a>
         @endauth

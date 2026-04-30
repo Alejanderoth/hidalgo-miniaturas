@@ -37,12 +37,14 @@
 
                         <form action="/carrito/actualizar/{{ $id }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <input type="number" name="cantidad" value="{{ $item['cantidad'] }}" min="1">
-                            <button class="boton">Actualizar</button>
+                            <button type="submit" class="boton">Actualizar</button>
                         </form>
 
                         <form action="/carrito/eliminar/{{ $id }}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <button class="boton eliminar">Eliminar</button>
                         </form>
                     </div>
@@ -62,6 +64,7 @@
 
             <form action="/carrito/vaciar" method="POST">
                 @csrf
+                @method('DELETE')
                 <button class="boton eliminar">Vaciar carrito</button>
             </form>
         </div>

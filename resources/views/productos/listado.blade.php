@@ -28,12 +28,12 @@
             <td>{{ $producto->activo ? 'Sí' : 'No' }}</td>
 
             <td>
-                <a href="/panel/productos/{{ $producto->id }}/editar">Editar</a>
+                <a href="/panel/productos/{{ $producto->id }}/editar" class="boton boton-tabla">Editar</a>
 
                 <form action="/panel/productos/{{ $producto->id }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button>Eliminar</button>
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="boton-eliminar" onclick="return confirm('¿Seguro que quieres eliminar este producto?')">Eliminar</button>
                 </form>
             </td>
         </tr>

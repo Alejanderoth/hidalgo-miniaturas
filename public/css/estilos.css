@@ -338,24 +338,6 @@ body {
     background: #9b4a3a;
 }
 
-.panel-header {
-    background: black;
-    color: white;
-    padding: 15px 20px;
-}
-
-.panel-nav {
-    margin-top: 10px;
-    display: flex;
-    gap: 15px;
-}
-
-.panel-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
 .panel-container {
     max-width: 1100px;
     margin: auto;
@@ -378,19 +360,6 @@ body {
 
 .tabla th {
     background: #ddd;
-}
-
-.boton-panel {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    padding: 6px 10px;
-    cursor: pointer;
-}
-
-.boton-panel:hover {
-    background: white;
-    color: black;
 }
 
 .panel-header {
@@ -431,6 +400,97 @@ body {
 }
 
 .boton-panel:hover {
+    background: white;
+    color: black;
+}
+
+.boton-eliminar {
+    background: #9b4a3a;
+    color: white;
+    border: none; /* quitamos borde negro */
+    padding: 8px 0;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.boton-eliminar:hover {
+    background: #7a3a2c;
+}
+
+.boton-tabla {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.form-card {
+    background: #eeeeee;
+    border: 2px solid black;
+    padding: 25px;
+    max-width: 700px;
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-card label {
+    font-weight: bold;
+}
+
+.form-card input,
+.form-card textarea,
+.form-card select {
+    padding: 8px;
+    border: 2px solid black;
+    font-size: 16px;
+}
+
+.form-card textarea {
+    min-height: 120px;
+}
+
+.form-acciones {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.boton-secundario {
+    background: #ddd;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.boton-secundario:hover {
+    background: #c8c8c8;
+}
+
+.alerta-error {
+    background: #f2d6d6;
+    border: 2px solid #9b4a3a;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.boton-logout {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.boton-logout:hover {
     background: white;
     color: black;
 }

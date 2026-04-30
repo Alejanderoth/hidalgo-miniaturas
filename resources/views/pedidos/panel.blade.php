@@ -24,17 +24,18 @@
             <td>
                 <form method="POST" action="/panel/pedidos/{{ $pedido->id }}/estado">
                     @csrf
+                    @method('PUT')
 
                     <select name="estado">
-                        <option>Pendiente</option>
-                        <option>Preparacion</option>
-                        <option>Enviado</option>
-                        <option>Completado</option>
-                        <option>Cancelado</option>
+                        <option value="pendiente" {{ $pedido->estado == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                        <option value="preparacion" {{ $pedido->estado == 'preparacion' ? 'selected' : '' }}>Preparación</option>
+                        <option value="enviado" {{ $pedido->estado == 'enviado' ? 'selected' : '' }}>Enviado</option>
+                        <option value="completado" {{ $pedido->estado == 'completado' ? 'selected' : '' }}>Completado</option>
+                        <option value="cancelado" {{ $pedido->estado == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
                     </select>
 
-                    <button class="boton">Actualizar</button>
-                </form>
+    <button type="submit" class="boton">Actualizar</button>
+</form>
             </td>
         </tr>
     @endforeach

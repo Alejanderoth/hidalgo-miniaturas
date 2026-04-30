@@ -248,16 +248,12 @@ class ProductController extends Controller
 
     session()->forget('carrito');
 
-    return redirect('/mis-pedidos');
-}
+    return redirect('/mi-cuenta');
+    }
 
     public function misPedidos()
     {
-        $pedidos = Pedido::where('user_id', auth()->id())
-            ->with('detalles.producto')
-            ->get();
-
-        return view('pedidos.mis-pedidos', compact('pedidos'));
+        return redirect('/mi-cuenta');
     }
 
     public function panelPedidos()
