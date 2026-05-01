@@ -54,8 +54,11 @@
 
         </div>
 
+        
         <div class="carrito-total">
             <h3>Total: {{ number_format($total, 2) }} €</h3>
+
+            <a href="/catalogo" class="boton">Continuar comprando</a>
 
             <form action="/pedido/confirmar" method="POST">
                 @csrf

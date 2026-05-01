@@ -23,7 +23,7 @@
             <td>{{ $producto->id }}</td>
             <td>{{ $producto->nombre }}</td>
             <td>{{ $producto->category ? $producto->category->nombre : '-' }}</td>
-            <td>{{ $producto->precio }} €</td>
+            <td class="precio">{{ $producto->precio }} €</td>
             <td>{{ $producto->stock }}</td>
             <td>{{ $producto->activo ? 'Sí' : 'No' }}</td>
 

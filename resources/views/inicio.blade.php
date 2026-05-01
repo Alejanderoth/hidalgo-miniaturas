@@ -22,7 +22,8 @@
 
             <div>
                 @if($destacado->imagen)
-                    <img src="{{ asset('img/productos/' . $destacado->imagen) }}" alt="{{ $destacado->nombre }}">
+                    <a href="/producto/{{ $destacado->id }}">
+                    <img src="{{ asset('img/productos/' . $destacado->imagen) }}" alt="{{ $destacado->nombre }}"></a>
                 @endif
             </div>
         </div>

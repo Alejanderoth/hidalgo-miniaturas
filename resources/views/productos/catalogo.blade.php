@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 @section('content')
 
 <div class="container">
@@ -39,7 +43,7 @@
                         </h3>
 
                         <p class="producto-descripcion">
-                            {{ $producto->descripcion }}
+                            {{ Str::limit($producto->descripcion, 120) }}
                         </p>
 
                         <p class="producto-precio">

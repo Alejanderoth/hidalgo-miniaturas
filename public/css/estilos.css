@@ -98,12 +98,15 @@ body {
 }
 
 .boton {
-    display: inline-block;
     background: #606b32;
     color: white;
+    border: 2px solid black;
     padding: 10px 15px;
-    text-decoration: none;
-    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
 }
 
 .nav {
@@ -203,6 +206,7 @@ body {
 .producto-info {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 8px;
 }
 
@@ -231,6 +235,7 @@ body {
     font-size: 20px;
     font-weight: bold;
     margin: 5px 0;
+    margin-top: auto;
 }
 
 .cuenta-grid {
@@ -503,4 +508,21 @@ body {
 
 .footer .bloque-info:hover {
     background: #cfcfcf;
+}
+
+.precio {
+    white-space: nowrap;
+    text-align: right;
+}
+
+.carrito-total form {
+    margin-top: 10px;
+}
+
+.carrito-total {
+    text-align: center;
+}
+
+.carrito-total .boton {
+    width: 200px;
 }

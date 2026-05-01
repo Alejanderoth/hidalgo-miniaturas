@@ -26,7 +26,8 @@
             </form>
 
         @else
-            <a href="/login">Login</a>
+        <a href="/login">Login</a>
+        <a href="/register">Registro</a>
         @endauth
     </div>
 </div>
