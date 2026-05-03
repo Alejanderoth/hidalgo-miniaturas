@@ -45,6 +45,7 @@ Route::middleware(['auth', 'role:empleado,administrador'])->group(function () {
     Route::get('/panel/pedidos', [ProductController::class, 'panelPedidos']);
     Route::put('/panel/pedidos/{id}/estado', [ProductController::class, 'actualizarEstadoPedido']);
     Route::get('/panel', [ProductController::class, 'panel']);
+    Route::get('/panel/pedidos/{id}', [ProductController::class, 'detallePedido']);
     });
     
 

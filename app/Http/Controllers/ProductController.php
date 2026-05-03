@@ -339,4 +339,15 @@ class ProductController extends Controller
 
         return view('usuarios.mi-cuenta', compact('user', 'pedidos'));
     }
+
+    public function detallePedido($id)
+    {
+        $pedido = Pedido::with('user', 'detalles.producto')->find($id);
+
+        if (!$pedido) {
+            return redirect('/panel/pedidos');
+        }
+
+        return view('pedidos.detalle', compact('pedido'));
+    }
 }

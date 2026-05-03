@@ -9,6 +9,7 @@
     <tr>
         <th>ID</th>
         <th>Usuario</th>
+        <th>Detalle</th>
         <th>Total</th>
         <th>Estado</th>
         <th>Acción</th>
@@ -18,6 +19,7 @@
         <tr>
             <td>{{ $pedido->id }}</td>
             <td>{{ $pedido->user->name }}</td>
+            <td><a href="/panel/pedidos/{{ $pedido->id }}" class="boton">Ver detalle</a></td>
             <td>{{ $pedido->total }} €</td>
             <td>{{ $pedido->estado }}</td>
 
