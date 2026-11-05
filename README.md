@@ -64,15 +64,15 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Edita el archivo `.env` con los datos de tu base de datos MySQL:
+Edita el archivo `.env` con los datos de conexión de tu propia base de datos MySQL. Este archivo no se sube nunca al repositorio:
 
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=hidalgo_miniaturas
-DB_USERNAME=root
-DB_PASSWORD=
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
 ```
 
 Crea las tablas con los datos iniciales (roles y un usuario de prueba), compila los estilos y arranca el servidor:
